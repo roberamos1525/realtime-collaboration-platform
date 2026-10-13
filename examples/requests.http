@@ -1,0 +1,51 @@
+### Sample requests (VS Code REST Client / JetBrains HTTP client format)
+@base = http://127.0.0.1:4000
+@token = paste-access-token-here
+
+### Health
+GET {{base}}/healthz
+
+### Register
+POST {{base}}/api/auth/register
+Content-Type: application/json
+
+{ "email": "sample@example.test", "username": "sample", "displayName": "Sample User", "password": "sample-password-1" }
+
+### Login (seeded demo users: alice/bob/carol/dave, password from `npm run cli -- seed --password ...`)
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{ "login": "alice", "password": "demo-password-123" }
+
+### Who am I
+GET {{base}}/api/auth/me
+Authorization: Bearer {{token}}
+
+### List workspaces
+GET {{base}}/api/workspaces
+Authorization: Bearer {{token}}
+
+### Create a task
+POST {{base}}/api/workspaces/WORKSPACE_ID/tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "title": "Draft release notes", "priority": "high", "labels": ["docs"], "dueDate": "2026-12-01" }
+
+### Move a task to "review" before another task
+POST {{base}}/api/tasks/TASK_ID/move
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "status": "review", "beforeId": null }
+
+### Search documents and tasks in one workspace
+GET {{base}}/api/search?q=release&types=document,task&workspaceId=WORKSPACE_ID
+Authorization: Bearer {{token}}
+
+### Unread notifications
+GET {{base}}/api/notifications?unread=true
+Authorization: Bearer {{token}}
+
+### Prometheus metrics (add Authorization if METRICS_TOKEN is set)
+GET {{base}}/metrics

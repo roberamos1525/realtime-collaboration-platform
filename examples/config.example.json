@@ -1,0 +1,23 @@
+{
+  "host": "0.0.0.0",
+  "port": 4000,
+  "databasePath": "./var/rcp.sqlite",
+  "logLevel": "info",
+  "http": {
+    "corsOrigins": ["http://localhost:5173"],
+    "bodyLimitBytes": 1048576
+  },
+  "rateLimit": {
+    "global": { "capacity": 300, "refillPerSecond": 50 },
+    "auth": { "capacity": 10, "refillPerSecond": 0.2 },
+    "ws": { "capacity": 200, "refillPerSecond": 100 }
+  },
+  "realtime": {
+    "heartbeatIntervalMs": 15000,
+    "presenceTimeoutMs": 45000
+  },
+  "documents": {
+    "snapshotEveryOps": 200,
+    "idleEvictMs": 300000
+  }
+}

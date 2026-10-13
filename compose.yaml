@@ -1,0 +1,18 @@
+# NOTE: not tested locally (Docker is unavailable on the dev machine).
+services:
+  app:
+    build: .
+    image: realtime-collaboration-platform:local
+    ports:
+      - "4000:4000"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET to at least 32 random characters}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:4000}
+      METRICS_TOKEN: ${METRICS_TOKEN:-}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    volumes:
+      - rcp-data:/data
+    restart: unless-stopped
+
+volumes:
+  rcp-data:

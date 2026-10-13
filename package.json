@@ -1,0 +1,40 @@
+{
+  "name": "realtime-collaboration-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Realtime collaborative documents, comments, tasks and notifications with an in-house RGA CRDT.",
+  "license": "MIT",
+  "author": "Robert Ramos",
+  "type": "module",
+  "workspaces": [
+    "packages/shared",
+    "apps/server",
+    "apps/web"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "tsc -b packages/shared apps/server && npm run build -w @rcp/web",
+    "typecheck": "tsc -b packages/shared apps/server && tsc -p apps/web/tsconfig.json --noEmit && tsc -p tests/tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "dev:server": "npm run dev -w @rcp/server",
+    "dev:web": "npm run dev -w @rcp/web",
+    "start": "node apps/server/dist/index.js",
+    "cli": "node apps/server/dist/cli.js",
+    "clean": "node -e \"for (const p of ['packages/shared/dist','apps/server/dist','apps/web/dist']) require('node:fs').rmSync(p,{recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@types/node": "^24.10.0",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "globals": "^16.5.0",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^4.1.11"
+  }
+}

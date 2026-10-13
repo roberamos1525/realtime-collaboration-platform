@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "types": ["node"],
+    "paths": {
+      "@rcp/shared": ["../packages/shared/src/index.ts"]
+    }
+  },
+  "include": [
+    "./**/*.ts",
+    "../packages/shared/src/**/*.test.ts",
+    "../apps/server/src/**/*.test.ts",
+    "../apps/server/src/__tests__/**/*.ts",
+    "../apps/web/src/**/*.test.ts",
+    "../vitest.config.ts"
+  ]
+}
